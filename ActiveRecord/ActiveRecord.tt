@@ -328,7 +328,7 @@ namespace <#=Namespace #>
                 
                   var repo=<#=Namespace #>.<#=fk.OtherClass#>.GetRepo();
                   return from items in repo.GetAll()
-                       where items.<#=CleanUp(fk.OtherColumn)#> == _<#=CleanUp(fk.ThisColumn)#>
+                       where items.<#=CleanUpColumnName(fk.OtherColumn)#> == _<#=CleanUpColumnName(fk.ThisColumn)#>
                        select items;
             }
         }
@@ -496,7 +496,7 @@ namespace <#=Namespace #>
             } else {
                 Update(provider);
             }
-            
+            SetIsLoaded(true);
         }
 
         <#if(tbl.Columns.Any(x=>x.Name=="CreatedBy" || x.Name=="ModifiedBy")){#>
